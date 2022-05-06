@@ -81,7 +81,7 @@ Hvis der tilføjes mere skærm tekst er det en god ide at følge dette skema:
 
 P= Permanent 
 
-U = Under User interface menuer, kræver handling
+U = Under User interface menuer *(kræver handling)*
 
 T = Afhænger af kodens handling 
 
