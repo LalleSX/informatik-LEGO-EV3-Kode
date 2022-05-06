@@ -43,7 +43,7 @@ Punkt (x2). Anden farve den skal dreje ved
 Punkt (x). x farve den skal dreje ved, forsætter indstil den ser farven sat ved `mål`
 Punkt (x Maal). Samme farve som `mål` 
 
-´Maal´:
+`Maal` :
 
 Punkt (Maal). Leverings farve. (Turen standser vis farven bliver set under leveringskørslen) 
 
