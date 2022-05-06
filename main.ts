@@ -2,42 +2,50 @@ let hoejreHjul = 0
 let maal = 0
 let venstreHjul = 0
 let hjem = 0
-let farveRuteHjem: number[] = []
 let vudering = 0
-let ligeKoersel = 0
-let farveRuteLevering: number[] = []
+let farveRuteHjem: number[] = []
 let farveListeRuteLevering = 0
 let efterFarvePauseTid = 0
-let drejVinkelListeRute: number[] = []
+let ligeKoersel = 0
+let farveRuteLevering: number[] = []
 let FarveListeAntalHjem = 0
-let hastighed = 0
+let drejVinkelListeRute: number[] = []
 let antalDrej = 0
 let pauseUI = false
+let hastighed = 0
+let funktionAntal = 0
+brick.buttonLeft.onEvent(ButtonEvent.Pressed, function () {
+    motors.stopAll()
+    brick.showValue("Fejlkode", funktionAntal, 2)
+})
 function Rvudering() {
-    brick.clearScreen()
+    funktionAntal = 6
     music.playSoundEffectUntilDone(sounds.expressionsFanfare)
     pauseUI = true
     brick.showString("Vuder leveringen!", 3)
     brick.showString("Syntes du den var god tryk op!", 5)
     brick.showString("Syntes du den var daarlig tryk ned", 7)
     while (pauseUI == true) {
-        brick.clearScreen()
-        if (brick.buttonUp.isPressed()) {
+        funktionAntal = 631
+        if (brick.buttonUp.isPressed() || sensors.touch1.isPressed()) {
+            funktionAntal = 6311
             brick.showImage(images.informationThumbsUp)
             music.playSoundEffectUntilDone(sounds.systemConfirm)
             vudering = 1
             pauseUI = false
-        } else if (brick.buttonDown.isPressed()) {
+        }
+        if (brick.buttonDown.isPressed()) {
+            funktionAntal = 6321
             brick.showImage(images.informationThumbsDown)
             music.playSoundEffectUntilDone(sounds.expressionsCrying)
             vudering = 0
             pauseUI = false
         }
     }
-    pauseUI = false
-    brick.clearScreen()
+    pauseUI = true
 }
 function drejHjem() {
+    funktionAntal = 7
     brick.showString("Koere hjem", 5)
     while (pauseUI == true) {
         for (let i = 0; i < FarveListeAntalHjem; i++) {
@@ -45,19 +53,22 @@ function drejHjem() {
                 koerHjem()
             } else {
                 drej()
+                funktionAntal = 7112
                 motors.largeBC.steer(ligeKoersel, hastighed)
                 sensors.color3.pauseUntilColorDetected(farveRuteHjem.shift())
             }
         }
         drej()
+        funktionAntal = 712
         motors.largeBC.steer(ligeKoersel, hastighed)
         sensors.color3.pauseUntilColorDetected(hjem)
         pauseUI = false
-        pause(efterFarvePauseTid)
+        pause(500)
         motors.stopAll()
     }
 }
 function koerHjem() {
+    funktionAntal = 8
     brick.clearScreen()
     if (vudering == 0) {
         music.playSoundEffectUntilDone(sounds.expressionsBoo)
@@ -66,13 +77,30 @@ function koerHjem() {
         music.playSoundEffectUntilDone(sounds.communicationGoodJob)
     }
 }
+brick.buttonEnter.onEvent(ButtonEvent.Pressed, function () {
+    brick.clearScreen()
+    sensors.gyro2.calibrate()
+    funktionAntal = 1
+    config()
+    variabler()
+    funktionAntal = 3
+    pause(200)
+    motors.largeBC.steer(ligeKoersel, hastighed)
+    sensors.color3.pauseUntilColorDetected(farveRuteLevering.shift())
+    drejGentag()
+    Rvudering()
+    brick.showString("Koere hjem", 5)
+    drejHjem()
+    koerHjem()
+})
 function variabler() {
+    funktionAntal = 2
     antalDrej = 0
     FarveListeAntalHjem = farveRuteHjem.length
     farveListeRuteLevering = farveRuteLevering.length
-    efterFarvePauseTid = 700
 }
 function drejGentag() {
+    funktionAntal = 4
     pauseUI = true
     while (pauseUI == true) {
         for (let i = 0; i < farveListeRuteLevering; i++) {
@@ -83,6 +111,7 @@ function drejGentag() {
             } else {
                 brick.showString("Drejer ik roer robotten!", 5)
                 drej()
+                funktionAntal = 4217
                 motors.largeBC.steer(ligeKoersel, hastighed)
                 brick.showString("Koere til destination", 5)
                 sensors.color3.pauseUntilColorDetected(farveRuteLevering.shift())
@@ -97,33 +126,22 @@ function config() {
     farveRuteHjem = [ColorSensorColor.Blue, ColorSensorColor.Green]
     hjem = ColorSensorColor.Black
     maal = ColorSensorColor.Red
+    efterFarvePauseTid = 300
 }
-brick.buttonEnter.onEvent(ButtonEvent.Pressed, function () {
-    brick.clearScreen()
-    sensors.gyro2.calibrate()
-    config()
-    variabler()
-    pause(200)
-    motors.largeBC.steer(ligeKoersel, hastighed)
-    sensors.color3.pauseUntilColorDetected(farveRuteLevering.shift())
-    drejGentag()
-    Rvudering()
-    brick.showString("Koere hjem", 5)
-    drejHjem()
-    koerHjem()
-})
 function drej() {
+    funktionAntal = 5
     pause(efterFarvePauseTid)
     motors.stopAll()
     sensors.gyro2.calibrate()
     pause(100)
     motors.largeBC.tank(venstreHjul, hoejreHjul)
+    funktionAntal = 55
     sensors.gyro2.pauseUntilRotated(drejVinkelListeRute[antalDrej])
     motors.stopAll()
     sensors.gyro2.calibrate()
     pause(100)
-    antalDrej = antalDrej + 1
 }
+funktionAntal = 0
 pauseUI = true
 brick.showString("Tryk Enter for start!", 3)
 forever(function () {
