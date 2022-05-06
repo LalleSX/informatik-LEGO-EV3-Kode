@@ -80,8 +80,11 @@ Hvis der tilføjes mere skærm tekst er det en god ide at følge dette skema:
 10. Title på software (P)
 
 P= Permanent 
+
 U = Under User interface menuer, kræver handling
+
 T = Afhænger af kodens handling 
+
 K = Kræver et tryk på en knap for at blive vist
 
 Tilføjer du evt en ny linje så tag dem markeret Firt for bedre overblik.
