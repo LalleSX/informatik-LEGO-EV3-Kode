@@ -1,5 +1,7 @@
 # Informatik-LEGO-EV3-Kode
 
+Det her koden til Lego Mindstorm robotten der kan levere diverse mindre ting. Koden kan nemt konfigureres ved enten at indsætte det i [Lego MakeCode](https://makecode.mindstorms.com/) eller selv gøre det med en tekst redigerings program.
+
 # Vejledning til konfiguration
 
 ## Ændre ruten, hastigheden mm. 
@@ -28,20 +30,20 @@ drejVinkelRute(80,80,170,-80,-80)
 
 For at ændre hvornår den skal dreje skan man ændre i nogle forskellige arrays og variabler:
 
-`farveRuteLevering`
+- `farveRuteLevering`
 
-`maal`
+- `maal`
 
-`farveRuteHjem`
+- `farveRuteHjem`
 
-`Hjem`
+- `Hjem`
 
 
 farveRuteLevering:
-Punkt (x1). Første farve den skal dreje ved
-Punkt (x2). Anden farve den skal dreje ved
-Punkt (x). x farve den skal dreje ved, forsætter indstil den ser farven sat ved `mål`
-Punkt (x Maal). Samme farve som `mål` 
+- Punkt (x1). Første farve den skal dreje ved
+- Punkt (x2). Anden farve den skal dreje ved
+-  Punkt (x). x farve den skal dreje ved, forsætter indstil den ser farven sat ved `mål`
+- Punkt (x Maal). Samme farve som `maal` 
 
 `Maal` :
 
@@ -60,15 +62,15 @@ Anbefaling og info til farvevalg på Mål og Hjem: Vælg en mere unaturlig farve
 En god farve kunne være Rød eller Grøn, mens en dårlig kunne være sort eller brun.
 
 Et eksempel på en farve rute kunne være:
-farveRuteLevering(Grøn,Blå,Rød)
-maal(Rød)
-farveRuteHjem(blå,grøn)
-hjem(gul)
+- farveRuteLevering(Grøn,Blå,Rød)
+- maal(Rød)
+- farveRuteHjem(blå,grøn)
+- hjem(gul)
 
 ## Info til at ændre skærmen 
 Hvis der tilføjes mere skærm tekst er det en god ide at følge dette skema:
 
-1. Battery Level (P)
+1. Battery Niveau (P)
 2. Fejl koder (K)
 3. Information til UI (U)
 4. Frit 
