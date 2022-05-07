@@ -67,6 +67,41 @@ Et eksempel på en farve rute kunne være:
 - farveRuteHjem(blå,grøn)
 - hjem(gul)
 
+## Fejlkoder
+
+Tryk på knappen venstre for at få en fejl kode vist 
+
+- onstart:0
+- config: 1
+- variabler: 2
+- onbutton_koer: 3
+
+- drejgentag: 4
+- drejgentag_efter_drej: 4217
+
+- drej:5
+- Drej_slut: 55
+
+Hvis en fejlkode er nogle af de nævnte ovenover er typiske fejl med vinkel eller farve order  
+
+- Rvudering:6
+- rvudering_intet_valg: 631
+- rvudering_efter_op: 6311
+- rvudering_efter_ned 6321
+
+En typisk fejl for vuderingen er PAUSEUI ikke er sat korrekt
+
+- drejhjem:7
+- drejHjem_if_else_efterdrej:7112
+- drejhjem_andet_while_drej:712
+
+Fejl med vinkel eller farve er typisk fejl her.
+
+- koerhjem:8
+
+Husk at tjekke efter hvilke farver som er på ruten som evt kan lave fejl.
+
+
 ## Info til at ændre skærmen 
 Hvis der tilføjes mere skærm tekst er det en god ide at følge dette skema:
 
