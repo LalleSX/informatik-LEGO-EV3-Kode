@@ -1,24 +1,10 @@
-let hoejreHjul = 0
-let maal = 0
-let venstreHjul = 0
-let hjem = 0
-let vudering = 0
-let farveRuteHjem: number[] = []
-let farveListeRuteLevering = 0
-let efterFarvePauseTid = 0
-let ligeKoersel = 0
-let farveRuteLevering: number[] = []
-let FarveListeAntalHjem = 0
-let drejVinkelListeRute: number[] = []
-let antalDrej = 0
-let pauseUI = false
-let hastighed = 0
-let funktionAntal = 0
-brick.buttonLeft.onEvent(ButtonEvent.Pressed, function () {
-    motors.stopAll()
-    brick.showValue("Fejlkode", funktionAntal, 2)
-})
-function Rvudering() {
+function variabler () {
+    funktionAntal = 2
+    antalDrej = 0
+    FarveListeAntalHjem = farveRuteHjem.length
+    farveListeRuteLevering = farveRuteLevering.length
+}
+function Rvudering () {
     funktionAntal = 6
     music.playSoundEffectUntilDone(sounds.expressionsFanfare)
     pauseUI = true
@@ -44,11 +30,15 @@ function Rvudering() {
     }
     pauseUI = true
 }
-function drejHjem() {
+brick.buttonLeft.onEvent(ButtonEvent.Pressed, function () {
+    motors.stopAll()
+    brick.showValue("Fejlkode", funktionAntal, 2)
+})
+function drejHjem () {
     funktionAntal = 7
     brick.showString("Koere hjem", 5)
     while (pauseUI == true) {
-        for (let i = 0; i < FarveListeAntalHjem; i++) {
+        for (let index = 0; index < FarveListeAntalHjem; index++) {
             if (sensors.color3.isColorDetected(hjem)) {
                 koerHjem()
             } else {
@@ -67,7 +57,7 @@ function drejHjem() {
         motors.stopAll()
     }
 }
-function koerHjem() {
+function koerHjem () {
     funktionAntal = 8
     brick.clearScreen()
     if (vudering == 0) {
@@ -75,6 +65,26 @@ function koerHjem() {
     } else if (vudering == 1) {
         brick.showImage(images.informationThumbsUp)
         music.playSoundEffectUntilDone(sounds.communicationGoodJob)
+    }
+}
+function drejGentag () {
+    funktionAntal = 4
+    pauseUI = true
+    while (pauseUI == true) {
+        for (let index = 0; index < farveListeRuteLevering; index++) {
+            if (sensors.color3.isColorDetected(maal)) {
+                pause(efterFarvePauseTid)
+                motors.stopAll()
+                pauseUI = false
+            } else {
+                brick.showString("Drejer ik roer robotten!", 5)
+                drej()
+                funktionAntal = 4217
+                motors.largeBC.steer(ligeKoersel, hastighed)
+                brick.showString("Koere til destination", 5)
+                sensors.color3.pauseUntilColorDetected(farveRuteLevering.shift())
+            }
+        }
     }
 }
 brick.buttonEnter.onEvent(ButtonEvent.Pressed, function () {
@@ -93,33 +103,7 @@ brick.buttonEnter.onEvent(ButtonEvent.Pressed, function () {
     drejHjem()
     koerHjem()
 })
-function variabler() {
-    funktionAntal = 2
-    antalDrej = 0
-    FarveListeAntalHjem = farveRuteHjem.length
-    farveListeRuteLevering = farveRuteLevering.length
-}
-function drejGentag() {
-    funktionAntal = 4
-    pauseUI = true
-    while (pauseUI == true) {
-        for (let i = 0; i < farveListeRuteLevering; i++) {
-            if (sensors.color3.isColorDetected(maal)) {
-                pause(efterFarvePauseTid)
-                motors.stopAll()
-                pauseUI = false
-            } else {
-                brick.showString("Drejer ik roer robotten!", 5)
-                drej()
-                funktionAntal = 4217
-                motors.largeBC.steer(ligeKoersel, hastighed)
-                brick.showString("Koere til destination", 5)
-                sensors.color3.pauseUntilColorDetected(farveRuteLevering.shift())
-            }
-        }
-    }
-}
-function config() {
+function config () {
     hastighed = 50
     drejVinkelListeRute = [80, 80, 170, -80, -80]
     farveRuteLevering = [ColorSensorColor.Green, ColorSensorColor.Blue, ColorSensorColor.Red]
@@ -128,7 +112,7 @@ function config() {
     maal = ColorSensorColor.Red
     efterFarvePauseTid = 300
 }
-function drej() {
+function drej () {
     funktionAntal = 5
     pause(efterFarvePauseTid)
     motors.stopAll()
@@ -137,10 +121,27 @@ function drej() {
     motors.largeBC.tank(venstreHjul, hoejreHjul)
     funktionAntal = 55
     sensors.gyro2.pauseUntilRotated(drejVinkelListeRute[antalDrej])
+    antalDrej = antalDrej + 1
     motors.stopAll()
     sensors.gyro2.calibrate()
     pause(100)
 }
+let hoejreHjul = 0
+let venstreHjul = 0
+let drejVinkelListeRute: number[] = []
+let efterFarvePauseTid = 0
+let maal = 0
+let hastighed = 0
+let ligeKoersel = 0
+let hjem = 0
+let vudering = 0
+let farveRuteLevering: number[] = []
+let farveListeRuteLevering = 0
+let farveRuteHjem: number[] = []
+let FarveListeAntalHjem = 0
+let antalDrej = 0
+let pauseUI = false
+let funktionAntal = 0
 funktionAntal = 0
 pauseUI = true
 brick.showString("Tryk Enter for start!", 3)
