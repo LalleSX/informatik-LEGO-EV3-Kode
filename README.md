@@ -2,6 +2,8 @@
 
 Det her koden til Lego Mindstorm robotten der kan levere diverse mindre ting. Koden kan nemt konfigureres ved enten at indsætte det i [Lego MakeCode](https://makecode.mindstorms.com/) eller selv gøre det med en tekst redigerings program.
 
+Koden er lavet af Victor R på Makecode. Koden kan bruges frit igennem GPL V3 Licenset 
+
 # Vejledning til konfiguration
 
 ## Ændre ruten, hastigheden mm. 
